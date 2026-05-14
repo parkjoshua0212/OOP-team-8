@@ -18,14 +18,6 @@ class Deck {
     }
 }
 
-class DealerValue{
-
-}
-
-class UserValue{
-
-}
-
 class CardValue {
     val cardValues = mapOf{
         "2" to 2,
