@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9dc1c57b-f1e7-4899-9883-1c6281e1b8fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/oop-game/core/src/main/kotlin/com/oop/game/Deck.kt" beforeDir="false" afterPath="$PROJECT_DIR$/oop-game/core/src/main/kotlin/com/oop/game/Deck.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oop-game/core/src/main/kotlin/com/oop/game/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/oop-game/core/src/main/kotlin/com/oop/game/Player.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="3Djox9fszUKfOtAZP44k4c2i7Ck" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/parkj/New folder/OOP project blackjacl/OOP-team-8"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9dc1c57b-f1e7-4899-9883-1c6281e1b8fb" name="Changes" comment="" />
+      <created>1778805083963</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1778805083963</updated>
+    </task>
+    <servers />
+  </component>
+</project>
