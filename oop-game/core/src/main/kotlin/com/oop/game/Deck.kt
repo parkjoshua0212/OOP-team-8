@@ -1,30 +1,53 @@
+enum class Suit(val symbol: String, val displayName: String) {
+    HEARTS  ("♥", "Hearts"),
+    DIAMONDS("♦", "Diamonds"),
+    CLUBS   ("♣", "Clubs"),
+    SPADES  ("♠", "Spades")
+}
+
+enum class Rank(val displayName: String, val value: Int) {
+    TWO  ("2", 2),
+    THREE("3", 3),
+    FOUR ("4", 4),
+    FIVE ("5", 5),
+    SIX  ("6", 6),
+    SEVEN("7", 7),
+    EIGHT("8", 8),
+    NINE ("9", 9),
+    TEN  ("10", 10),
+    JACK ("Jack", 10),
+    QUEEN("Queen", 10),
+    KING ("King", 10),
+    ACE  ("Ace", 11);   // Ace 1/11 처리는 Hand 단계에서
+
+    override fun toString(): String = displayName
+}
+
 class Deck {
-    val suit = listOf("Hearts", "Diamonds", "Clubs", "Spades")
-    val rank = listOf("2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace")
-// Deck use Enum (suit and rank) instead of list, need to fix later
-    val cards = mutableListOf<String>() //Change <String> to Card class later, need to create Card class first
+    private val cards = mutableListOf<String>()
 
     init {
-        for (s in suit) {
-            for (r in rank) {
-                cards.add("$r of $s")
+        for (s in Suit.values()) {
+            for (r in Rank.values()) {
+                cards.add("$r of ${s.displayName}")
             }
         }
         cards.shuffle()
     }
 
+    val size: Int get() = cards.size
+
     fun dealCard(): String {
-        return cards
+        return cards.removeAt(cards.size - 1)
     }
 
-    fun isEmpty(): Boolean {
-        return cards.isEmpty()
-    }
+    fun isEmpty(): Boolean = cards.isEmpty()
 }
 
-fun main() { //Testing to see deck is working properly, no need to keep this in final code
+
+fun main() {
     val deck = Deck()
-    println("Deck size: ${deck.cards.size}")
+    println("Deck size: ${deck.size}")
     println("First card: ${deck.dealCard()}")
-    println("Deck size after dealing: ${deck.cards.size}")
+    println("Deck size after dealing: ${deck.size}")
 }
