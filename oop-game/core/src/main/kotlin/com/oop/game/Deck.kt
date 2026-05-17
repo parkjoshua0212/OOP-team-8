@@ -1,3 +1,4 @@
+package com.oop.game
 enum class Suit(val symbol: String, val displayName: String) {
     HEARTS  ("♥", "Hearts"),
     DIAMONDS("♦", "Diamonds"),
@@ -42,12 +43,4 @@ class Deck {
     }
 
     fun isEmpty(): Boolean = cards.isEmpty()
-}
-
-
-fun main() {
-    val deck = Deck()
-    println("Deck size: ${deck.size}")
-    println("First card: ${deck.dealCard()}")
-    println("Deck size after dealing: ${deck.size}")
 }
