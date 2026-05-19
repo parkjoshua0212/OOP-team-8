@@ -1,4 +1,4 @@
-package com.oop.game
+
 enum class Suit(val symbol: String, val displayName: String) {
     HEARTS  ("♥", "Hearts"),
     DIAMONDS("♦", "Diamonds"),
