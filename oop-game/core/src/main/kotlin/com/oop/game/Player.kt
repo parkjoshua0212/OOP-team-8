@@ -1,53 +1,60 @@
 package com.oop.game
 
-fun calculateScore(hand: MutableList<Card>): Int {
+open class Participant {
+    var hand = mutableListOf<Card>()
+        protected set
     var score = 0
-    var aceCount = 0
-    for (card in hand) {
-        val rank = card.rank.value
-        score += rank
-        if (card.rank == Rank.ACE)
-            aceCount++
-    }
-    // 점수가 21점 이상일 경우 에이스 조정
-    while (score > 21 && aceCount > 0) {
-        score -= 10
-        aceCount--
-    }
-    return score
-}
+        protected set
 
-class Player { //Score class is for calculating player's score, need to fix later parent class and how to use it in player and dealer class
-//Score shouldn't be a parent class of player and dealer, need to fix later, maybe create a method in score class to calculate score and call it in player and dealer class
-    var hand = mutableListOf<Card>()
-    var playerScore = 0
+    fun calculateScore(hand: MutableList<Card>): Int {
+        var score = 0
+        var aceCount = 0
+        for (card in hand) {
+            val rank = card.rank.value
+            score += rank
+            if (card.rank == Rank.ACE)
+                aceCount++
+        }
+        while (score > 21 && aceCount > 0) {
+            score -= 10
+            aceCount--
+        }
+        return score
+    }
 
     fun drawCard(deck: Deck) {
         if (!deck.isEmpty()) {
             val card = deck.dealCard()
             hand.add(card)
-            playerScore = calculateScore(hand)
+            score = calculateScore(hand)
         }
     }
-    //Need to create player draw 2 cards at beginning of turn and then decide to draw more or not
-    //Beginning of turn -> Player draw card, dealer draw, player draw, dealer draw.//check if this is the right way to call startTurn() method from GameTurn class
-    //One card of the dealer is hidden
 }
 
-class Dealer {//same with dealer class, fix later
-    var hand = mutableListOf<Card>()
-    var dealerScore = 0
 
-    fun drawCard(deck: Deck) {
-        if (!deck.isEmpty()) {
-            val card = deck.dealCard()
-            hand.add(card)
-            dealerScore = calculateScore(hand)
+class Player : Participant() {
+    fun takeTurn(deck: Deck) {
+        while (score < 21) {
+            println("Do you want to hit? (yes/no)")
+            val input = readLine()
+            if (input != null && input.equals("yes", ignoreCase = true)) {
+                drawCard(deck)
+                println("Your hand: $hand, Score: $score")
+            } else {
+                println("You stand.")
+                break
+            }
         }
     }
-    
-    //Need to implement dealer's logic to draw cards until score is 17 or highers
-    
+}
+
+
+class Dealer : Participant() {
+    fun takeTurn(deck: Deck) {
+        while (score < 17) {
+            drawCard(deck)
+        }
+    }
 }
 
 class GameTurn {
@@ -61,40 +68,29 @@ class GameTurn {
         player.drawCard(deck)
         dealer.drawCard(deck)
 
-        println("Your hand: ${player.hand}, Score: ${player.playerScore}")
+        println("Your hand: ${player.hand}, Score: ${player.score}")
         println("Dealer shows: ${dealer.hand[0]}")
 
-        while (player.playerScore < 21) {
-            println("Do you want to hit? (yes/no)")
-            val input = readLine()
-            if (input.equals("yes", ignoreCase = true)) {
-                player.drawCard(deck)
-                println("Your hand: ${player.hand}, Score: ${player.playerScore}")
-            } else {
-                println("You stand.")
-                break
-            }
-        }
+        player.takeTurn(deck)
 
-        if (player.playerScore > 21) {
+        if (player.score > 21) {
             println("You busted! Dealer wins.")
             return
         }
 
-        println("Dealer's hand: ${dealer.hand}, Score: ${dealer.dealerScore}")
-        while (dealer.dealerScore < 17) {
-            dealer.drawCard(deck)
-            println("Dealer draws. Hand: ${dealer.hand}, Score: ${dealer.dealerScore}")
-        }
+        println("Dealer's hand: ${dealer.hand}, Score: ${dealer.score}")
+        dealer.takeTurn(deck)
+        println("Dealer draws. Hand: ${dealer.hand}, Score: ${dealer.score}")
+
 
         println("--- RESULTS ---")
-        println("Your hand: ${player.hand}, Score: ${player.playerScore}")
-        println("Dealer hand: ${dealer.hand}, Score: ${dealer.dealerScore}")
+        println("Your hand: ${player.hand}, Score: ${player.score}")
+        println("Dealer hand: ${dealer.hand}, Score: ${dealer.score}")
 
         when {
-            dealer.dealerScore > 21 -> println("Dealer busts! You win!")
-            player.playerScore > dealer.dealerScore -> println("You win!")
-            player.playerScore < dealer.dealerScore -> println("Dealer wins!")
+            dealer.score > 21 -> println("Dealer busts! You win!")
+            player.score > dealer.score -> println("You win!")
+            player.score < dealer.score -> println("Dealer wins!")
             else -> println("It's a tie!")
         }
     }
