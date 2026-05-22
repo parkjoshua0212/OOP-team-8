@@ -1,3 +1,4 @@
+/*
 package com.oop.game.example
 
 import com.badlogic.gdx.Gdx
@@ -272,3 +273,4 @@ class ExampleWorld(
         tileTexture.dispose()
     }
 }
+ */
