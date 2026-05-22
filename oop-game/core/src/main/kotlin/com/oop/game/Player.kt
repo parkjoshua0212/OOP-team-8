@@ -54,8 +54,15 @@ class GameTurn {
     val deck = Deck()
     val player = Player()
     val dealer = Dealer()
+    val shop = Shop()
+    var balance = 1000
 
     fun startTurn() {
+        println("상점을 이용하시겠습니까? (yes/no)")
+        val input = readLine()
+        if (input == "yes") {
+            openShop()
+        }
         player.drawCard(deck)
         dealer.drawCard(deck)
         player.drawCard(deck)
@@ -98,9 +105,19 @@ class GameTurn {
             else -> println("It's a tie!")
         }
     }
+    fun openShop() {
+        shop.showItems()
+        println("구매할 아이템 이름을 입력하세요 (없으면 그냥 엔터)")
+        val itemName = readLine()
+        if (itemName != null && itemName != "") {
+            balance = shop.buyItem(itemName, balance)
+            println("현재 잔액: ${balance}원")
+        }
+    }
 }
 
-fun main() {
-    val game = GameTurn()
-    game.startTurn()
-}
+
+    fun main() {
+        val game = GameTurn()
+        game.startTurn()
+    }

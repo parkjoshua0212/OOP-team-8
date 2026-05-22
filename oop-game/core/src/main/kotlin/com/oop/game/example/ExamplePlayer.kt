@@ -1,3 +1,4 @@
+/*
 package com.oop.game.example
 
 import com.badlogic.gdx.Gdx
@@ -65,3 +66,4 @@ class ExamplePlayer(
         texture.dispose()
     }
 }
+*/

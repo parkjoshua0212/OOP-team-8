@@ -1,3 +1,4 @@
+/*
 package com.oop.game.example
 
 import com.badlogic.gdx.Gdx
@@ -67,3 +68,4 @@ class ExampleEnemy(
         texture.dispose()
     }
 }
+*/
