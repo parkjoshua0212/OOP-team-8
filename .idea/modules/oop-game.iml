@@ -6,7 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/../../oop-game/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../oop-game/build" />
     </content>
-    <orderEntry type="jdk" jdkName="temurin-21" jdkType="JavaSDK" />
+    <content url="file://$MODULE_DIR$/../../oop-game">
+      <excludeFolder url="file://$MODULE_DIR$/../../oop-game/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../oop-game/build" />
+    </content>
+    <orderEntry type="jdk" jdkName="temurin-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

@@ -3,13 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BlackJackTest.iml" filepath="$PROJECT_DIR$/BlackJackTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oop-game.iml" filepath="$PROJECT_DIR$/.idea/modules/oop-game.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/oop-game.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/oop-game.core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/oop-game.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/oop-game.core.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/oop-game.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/oop-game.core.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/oop-game.desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/oop-game.desktop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/oop-game.desktop.main.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/oop-game.desktop.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/oop-game.desktop.test.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/oop-game.desktop.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OOP-team-8.iml" filepath="$PROJECT_DIR$/OOP-team-8.iml" group="oop-game" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oop-game.iml" filepath="$PROJECT_DIR$/.idea/modules/oop-game.iml" group="oop-game" />
     </modules>
   </component>
 </project>
