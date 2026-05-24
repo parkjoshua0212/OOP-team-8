@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="oop-game.core" target="21" />
+      <module name="oop-game.core.main" target="21" />
+      <module name="oop-game.core.test" target="21" />
+      <module name="oop-game.desktop" target="21" />
+      <module name="oop-game.desktop.main" target="21" />
+      <module name="oop-game.desktop.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
