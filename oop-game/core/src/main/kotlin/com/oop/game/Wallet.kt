@@ -55,7 +55,7 @@ class Wallet {
     // 게임 승리 시 베팅금액의 2배 입금
     fun playerWin(bet: Int) {
         balance.deposit(bet * 2)
-    }ㄱ
+    }
     // 잔액 확인
     fun getCurrentBalance(): Int {
         return balance.amount
