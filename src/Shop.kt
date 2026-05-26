@@ -16,6 +16,9 @@ class Shop {
         Item("double", 500, "다음 판 배팅금이 2배가 됩니다")
     )
 
+    //Players current rounds items
+    val ownedItems = mutableListOf<String>()
+
     // 상점 목록 출력
     fun showItems() {
         println("===== 상점 =====")
@@ -26,29 +29,32 @@ class Shop {
     }
 
     // 아이템 구매
-    fun buyItem(itemName: String, balance: Int): Int {
-        // 아이템 찾기
-        var foundItem: Item? = null
-        for (item in itemList) {
-            if (item.name == itemName) {
-                foundItem = item
-            }
+    fun buyItem(itemName: String, wallet: Wallet) {
+        val foundItem = itemList.find {
+            it.name.equals(itemName, ignoreCase = true)
         }
-
-        // 없는 아이템
         if (foundItem == null) {
-            println("없는 아이템이에요!")
-            return balance
+            println("This item does not exists")
+            return
+        }
+        if (ownedItems.contains(foundItem.name)) {
+            println("You already have this item")
+            return
+        }
+        if (!wallet.canAfford(foundItem.price)) {
+            println("You dont have enough funds! (Require: ${foundItem.price}")
+            return
         }
 
-        // 잔액 부족
-        if (balance < foundItem.price) {
-            println("잔액이 부족해요! (잔액: ${balance}원, 필요: ${foundItem.price}원)")
-            return balance
-        }
+        wallet.placeBet(foundItem.price) //reduce money from wallet
+        ownedItems.add(foundItem.name)
+        println("${foundItem.name} Purchase complete!")
+    }
+    fun hasItem(itemName: String):Boolean {
+        return ownedItems.contains(itemName)
+    }
 
-        // 구매 성공
-        println("${foundItem.name} 구매 완료! (-${foundItem.price}원)")
-        return balance - foundItem.price
+    fun clearItems() {
+        ownedItems.clear()
     }
 }
