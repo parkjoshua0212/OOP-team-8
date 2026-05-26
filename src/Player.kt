@@ -30,7 +30,7 @@ open class Participant {
         }
     }
 
-    fun resetHand(){ //function to reset players hand and score
+    fun resetHand() { //function to reset players hand and score
         hand.clear()
         score = 0
     }
@@ -67,126 +67,140 @@ class Game {
     val shop = Shop()
     val result = Result()
 
-    //Minimum round betting system
-    val minBets = listOf(250, 1000, 2500, 5000, 10000)
-    val totalRounds = 5
+    val initialBalance = 1000
+    val totalStages = 20
+    val roundsPerStage = 5
 
-    fun start() {
-        fun getBet(minBet: Int): Int {
-            while (true) {
-                println("Enter betting amount: (Minimum betting req: $minBet)")
-                val input = readLine()?.toIntOrNull()
+    fun getBet(minBet: Int): Int {
+        while (true) {
+            println("Enter betting amount: (Minimum betting req: $minBet)")
+            val input = readLine()?.toIntOrNull()
 
-                if (input == null || input < minBet) {
-                    println("Minimum bet is $minBet. Please bet above minimum bet")
-                    continue
-                }
-                if (!wallet.canAfford(input)) {
-                    println("Not enough funds")
-                    continue
-                }
-                wallet.placeBet(input)
-                println("${input} bet complete!")
-                return input
+            if (input == null || input < minBet) {
+                println("Minimum bet is $minBet. Please bet above minimum bet")
+                continue
             }
+            if (!wallet.canAfford(input)) {
+                println("Not enough funds")
+                continue
+            }
+            wallet.placeBet(input)
+            println("${input} bet complete!")
+            return input
         }
+    }
 
-        fun openShop() {
-            shop.showItems()
-            println("Enter the item you want to purchase.")
-            val itemName = readLine()
-            if (!itemName.isNullOrEmpty()) {
-                shop.buyItem(itemName, wallet)
-                wallet.displayBalance()
-            }
-        }
-
-        fun playRound(bet: Int) {
-            val deck = Deck()
-            val player = Player()
-            val dealer = Dealer()
-
-            //Card distribution
-            player.drawCard(deck)
-            dealer.drawCard(deck)
-            player.drawCard(deck)
-            dealer.drawCard(deck)
-
-            //Show player hands
-            println("\nMy hand: ${player.hand}, Score: ${player.score}")
-            println("Dealers hand: ${dealer.hand[0]}")
-
-            //Hint item function -> Shows dealers hidden hand
-            if (shop.hasItem("hint")) {
-                println("[Hint used!] Dealers hidden card is: ${dealer.hand[1]}")
-
-            }
-
-            //player takes turn
-            player.takeTurn(deck)
-
-            //Check for bust
-            if (player.score > 21) {
-                val roundResult = result.determine(player.score, dealer.score)
-                result.applyResult(roundResult, bet, wallet, shop)
-                wallet.displayBalance()
-                return
-            }
-
-            //Dealers turn
-            dealer.takeTurn(deck)
-            println("Dealers card: ${dealer.hand}, Score: ${dealer.score}")
-
-            //Result check
-            println("This rounds result")
-            println("Players score: ${player.score} | Dealers score: ${dealer.score}")
-            val roundResult = result.determine(player.score, dealer.score)
-            result.applyResult(roundResult, bet, wallet, shop)
+    fun openShop() {
+        shop.showItems()
+        println("Enter the item you want to purchase.")
+        val itemName = readLine()
+        if (!itemName.isNullOrEmpty()) {
+            shop.buyItem(itemName, wallet)
             wallet.displayBalance()
         }
+    }
 
-        wallet.initialize(1000)
+    fun playRound(bet: Int) {
+        val deck = Deck()
+        val player = Player()
+        val dealer = Dealer()
 
-        println("================")
-        println("Welcome to the blackjack game")
-        println("If you beat 5 rounds of blackjack you win!")
-        println("================")
+        player.drawCard(deck)
+        dealer.drawCard(deck)
+        player.drawCard(deck)
+        dealer.drawCard(deck)
 
-        for (round in 1..totalRounds) {
-            val minBet = minBets[round - 1]
+        println("\nMy hand: ${player.hand}, Score: ${player.score}")
+        println("Dealers hand: ${dealer.hand[0]}, Score: ${dealer.score}")
 
-            println("\n Round $round / $totalRounds")
+        if (shop.hasItem("hint")) {
+            println("[Hint used!] Dealers hidden card is: ${dealer.hand[1]}")
+        }
+
+        player.takeTurn(deck)
+
+        if (player.score > 21) {
+            val roundResult = result.determine(player.score, dealer.score, player.hand.size, dealer.hand.size)
+            result.applyResult(roundResult, bet, wallet, shop)
+            wallet.displayBalance()
+            return
+        }
+
+        dealer.takeTurn(deck)
+        println("Dealers card: ${dealer.hand}, Score: ${dealer.score}")
+
+        println("This rounds result")
+        println("Players score: ${player.score} | Dealers score: ${dealer.score}")
+        val roundResult = result.determine(player.score, dealer.score, player.hand.size, dealer.hand.size)
+        result.applyResult(roundResult, bet, wallet, shop)
+        wallet.displayBalance()
+    }
+
+    fun playStage(stage: Int, targetBalance: Int): Boolean {
+        val minBet = targetBalance / 10
+
+        println("\n===== Stage $stage =====")
+        println("Target: $targetBalance")
+
+        for (round in 1..roundsPerStage) {
+            println("\n Round $round / $roundsPerStage")
             println("Minimum bet: $minBet")
             wallet.displayBalance()
 
-            //Minimum betting check
             if (!wallet.canAfford(minBet)) {
                 println("Not enough funds! Cannot continue with game")
                 println("Game over")
-                return
+                return false
             }
 
-            //shop
-            println("Use shop?")
-            val shopInput = readLine()
-            if (shopInput.equals("Yes", ignoreCase = true) == true) {
-                openShop()
+            if (stage != 1 && round == 1) {
+                println("Use shop?")
+                val shopInput = readlnOrNull()
+                if (shopInput.equals("Yes", ignoreCase = true)) {
+                    openShop()
+                }
             }
 
             val bet = getBet(minBet)
-
-            //Play round
             playRound(bet)
-
-            //When round end clear item
             shop.clearItems()
+        }
 
-            //If player beats 5 rounds
+        if (wallet.getCurrentBalance() >= targetBalance) {
             println("================")
-            println("Congratulations! You Win!")
+            println("Stage $stage Clear!")
             println("Total money: ${wallet.getCurrentBalance()}")
             println("================")
+            return true
+        } else {
+            println("================")
+            println("You DIED")
+            println("Total money: ${wallet.getCurrentBalance()}")
+            println("================")
+            return false
         }
+    }
+
+    fun start() {
+        wallet.initialize(initialBalance)
+
+        println("================")
+        println("Welcome to the blackjack game")
+        println("If you beat $totalStages stages you win!")
+        println("================")
+
+        var stageTarget = initialBalance * 2
+
+        for (stage in 1..totalStages) {
+            val cleared = playStage(stage, stageTarget)
+            if (!cleared) return
+            stageTarget *= 2
+        }
+
+        println("================")
+        println("YOU CLEARED ALL STAGES!")
+        println("Total money: ${wallet.getCurrentBalance()}")
+        println("================")
     }
 }
 

@@ -4,14 +4,18 @@ enum class RoundResult{
     PLAYER_WIN,
     DEALER_WIN,
     TIE,
-    PLAYER_BUST
+    PLAYER_BUST,
+    BLACKJACK
 }
 
 class Result{
-    fun determine(playerScore: Int, dealerScore: Int): RoundResult{
+    fun determine(playerScore: Int, dealerScore: Int, playerHandSize: Int, dealerHandSize: Int): RoundResult{
         return when {
+            playerScore == 21 && dealerScore == 21 && playerHandSize == 2 && dealerHandSize == 2 -> RoundResult.TIE
+            playerHandSize == 2 && playerScore == 21 -> RoundResult.BLACKJACK
+            dealerHandSize == 2 && dealerScore == 21 -> RoundResult.DEALER_WIN
             playerScore > 21 -> RoundResult.PLAYER_BUST
-            dealerScore > 21 -> RoundResult.DEALER_WIN
+            dealerScore > 21 -> RoundResult.PLAYER_WIN
             playerScore > dealerScore -> RoundResult.PLAYER_WIN
             playerScore < dealerScore -> RoundResult.DEALER_WIN
             else -> RoundResult.TIE
@@ -51,6 +55,11 @@ class Result{
                         wallet.placeBet(bet)
                     }
                 }
+            }
+
+            RoundResult.BLACKJACK -> {
+                println("Blackjack!")
+                wallet.blackjackWin(bet)
             }
         }
     }
