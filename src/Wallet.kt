@@ -9,7 +9,7 @@ class Balance {
     }
     fun withdraw(withdraw:Int): Boolean {
         if (withdraw <= amount){
-            this.amount -= amount
+            this.amount -= withdraw
             return true
             } else {
                 println("Not enough funds")
