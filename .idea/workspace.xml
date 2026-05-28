@@ -7,9 +7,6 @@
     <list default="true" id="d09df2db-bfd7-489d-9a8f-2e19a81c0604" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Result.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Result.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shop.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shop.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Wallet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Wallet.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -111,7 +111,7 @@ class Game {
         dealer.drawCard(deck)
 
         println("\nMy hand: ${player.hand}, Score: ${player.score}")
-        println("Dealers hand: ${dealer.hand[0]}, Score: ${dealer.score}")
+        println("Dealers hand: ${dealer.hand[0]}, Score: ${dealer.hand[0]} + ?")
 
         if (shop.hasItem("hint")) {
             println("[Hint used!] Dealers hidden card is: ${dealer.hand[1]}")
@@ -140,7 +140,7 @@ class Game {
         val minBet = targetBalance / 10
 
         println("\n===== Stage $stage =====")
-        println("Target: $targetBalance")
+        println("Stage $stage Target: $targetBalance")
 
         for (round in 1..roundsPerStage) {
             println("\n Round $round / $roundsPerStage")
