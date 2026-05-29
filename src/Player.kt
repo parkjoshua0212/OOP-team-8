@@ -29,11 +29,6 @@ open class Participant {
             score = calculateScore(hand)
         }
     }
-
-    fun resetHand() { //function to reset players hand and score
-        hand.clear()
-        score = 0
-    }
 }
 
 
@@ -189,12 +184,12 @@ class Game {
         println("If you beat $totalStages stages you win!")
         println("================")
 
-        var stageTarget = initialBalance * 2
+        var targetBalance = initialBalance * 2
 
         for (stage in 1..totalStages) {
-            val cleared = playStage(stage, stageTarget)
+            val cleared = playStage(stage, targetBalance)
             if (!cleared) return
-            stageTarget *= 2
+            targetBalance *= 2
         }
 
         println("================")
