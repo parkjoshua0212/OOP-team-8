@@ -49,7 +49,7 @@ class Wallet {
         }
 
         fun blackjackWin(bet: Int) {
-            val blackjackPayout = bet * 5 / 2
+            val blackjackPayout = bet * 3 / 2 // 1.5배
             balance.deposit(blackjackPayout)
         }
 
