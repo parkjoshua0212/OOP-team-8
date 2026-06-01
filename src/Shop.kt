@@ -1,6 +1,5 @@
 package com.oop.game
 
-// 상점에서 판매할 아이템 하나를 나타내는 클래스
 class Item(
     val name: String,
     val price: Int,
@@ -9,14 +8,15 @@ class Item(
 
 class Shop {
 
-    // 판매할 아이템 목록
     val itemList = mutableListOf(
-        Item("hint", 200, "딜러의 카드 한 장을 살짝 봅니다"),
+        Item("hint", 200, "딜러의 카드 한 장을 슬쩍 봅니다"),
         Item("insurance", 300, "버스트 시 배팅금을 돌려받습니다"),
-        Item("double", 500, "다음 판 배팅금이 2배가 됩니다")
+        Item("double", 500, "이번 라운드 승리시 받는 금액이 2배가 됩니다 ")
     )
 
-    // 상점 목록 출력
+    val ownedItems = mutableListOf<String>()
+    val activeItems = mutableListOf<String>()  // 이번 라운드에 실제로 사용 중인 아이템
+
     fun showItems() {
         println("===== 상점 =====")
         for (item in itemList) {
@@ -25,30 +25,46 @@ class Shop {
         println("================")
     }
 
-    // 아이템 구매
-    fun buyItem(itemName: String, balance: Int): Int {
-        // 아이템 찾기
-        var foundItem: Item? = null
-        for (item in itemList) {
-            if (item.name == itemName) {
-                foundItem = item
-            }
+    fun buyItem(itemName: String, wallet: Wallet) {
+        val foundItem = itemList.find {
+            it.name.equals(itemName, ignoreCase = true)
         }
-
-        // 없는 아이템
         if (foundItem == null) {
-            println("없는 아이템이에요!")
-            return balance
+            println("This item does not exists")
+            return
+        }
+        if (ownedItems.contains(foundItem.name)) {
+            println("You already have this item")
+            return
+        }
+        if (!wallet.canAfford(foundItem.price)) {
+            println("You don't have enough funds! (Require: ${foundItem.price}")
+            return
         }
 
-        // 잔액 부족
-        if (balance < foundItem.price) {
-            println("잔액이 부족해요! (잔액: ${balance}원, 필요: ${foundItem.price}원)")
-            return balance
-        }
+        wallet.placeBet(foundItem.price)
+        ownedItems.add(foundItem.name)
+        println("${foundItem.name} Purchase complete!")
+    }
 
-        // 구매 성공
-        println("${foundItem.name} 구매 완료! (-${foundItem.price}원)")
-        return balance - foundItem.price
+    // "yes" 선택 시: ownedItems -> activeItems로 이동
+    fun activateItems() {
+        activeItems.addAll(ownedItems)
+        ownedItems.clear()
+    }
+
+    // activeItems 기준으로 확인 (이번 라운드에 사용 중인지)
+    fun checkMyItem(itemName: String): Boolean {
+        return activeItems.contains(itemName)
+    }
+
+    // 라운드 끝: activeItems만 초기화 (ownedItems는 유지)
+    fun clearItems() {
+        activeItems.clear()
+    }
+
+    // 보유 아이템이 있는지 (ownedItems 기준)
+    fun hasItems(): Boolean {
+        return ownedItems.isNotEmpty()
     }
 }

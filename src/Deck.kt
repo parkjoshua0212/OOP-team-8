@@ -1,11 +1,11 @@
 package com.oop.game
 
 //카드 무늬 - 카드 무늬는 4개의 선택지 고정이므로 enum 클래스로
-enum class Suit(val symbol: String, val displayName: String) {
-    HEARTS  ("♥", "Hearts"),
-    DIAMONDS("♦", "Diamonds"),
-    CLUBS   ("♣", "Clubs"),
-    SPADES  ("♠", "Spades")
+enum class Suit(val symbol: String) {
+    HEARTS  ("♥"),
+    DIAMONDS("♦"),
+    CLUBS   ("♣"),
+    SPADES  ("♠")
 }
 
 //카드 숫자 - 위와 마찬가지
