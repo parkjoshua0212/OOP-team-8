@@ -36,7 +36,7 @@ class Player : Participant() {
     fun takeTurn(deck: Deck) {
         while (score < 21) {
             println("Do you want to hit? (yes/no)")
-            val input = readLine()
+            val input = readlnOrNull()
             if (input != null && input.equals("yes", ignoreCase = true)) {
                 drawCard(deck)
                 println("Your hand: $hand, Score: $score")
@@ -69,7 +69,7 @@ class Game {
     fun getBet(minBet: Int): Int {
         while (true) {
             println("Enter betting amount: (Minimum betting req: $minBet)")
-            val input = readLine()?.toIntOrNull()
+            val input = readlnOrNull()?.toIntOrNull()
 
             if (input == null || input < minBet) {
                 println("Minimum bet is $minBet. Please bet above minimum bet")
@@ -80,7 +80,7 @@ class Game {
                 continue
             }
             wallet.placeBet(input)
-            println("${input} bet complete!")
+            println("$input bet complete!")
             return input
         }
     }
@@ -88,7 +88,7 @@ class Game {
     fun openShop() {
         shop.showItems()
         println("Enter the item you want to purchase.")
-        val itemName = readLine()
+        val itemName = readlnOrNull()
         if (!itemName.isNullOrEmpty()) {
             shop.buyItem(itemName, wallet)
             wallet.displayBalance()
@@ -106,9 +106,17 @@ class Game {
         dealer.drawCard(deck)
 
         println("\nMy hand: ${player.hand}, Score: ${player.score}")
-        println("Dealers hand: ${dealer.hand[0]}, Score: ${dealer.hand[0]} + ?")
+        println("Dealers hand: ${dealer.hand[0]}, Score: ${dealer.hand[0].rank.value}")
 
-        if (shop.hasItem("hint")) {
+        if (shop.hasItems()) {
+            println("Do you want to use your items? ${shop.ownedItems} (yes/no)")
+            val input = readlnOrNull()
+            if (input.equals("yes", ignoreCase = true)) {
+                shop.activateItems()
+            }
+        }
+
+        if (shop.checkMyItem("hint")) {
             println("[Hint used!] Dealers hidden card is: ${dealer.hand[1]}")
         }
 
@@ -149,9 +157,9 @@ class Game {
             }
 
             if (stage != 1 && round == 1) {
-                println("Use shop?")
+                println("Use shop? (yes/no)")
                 val shopInput = readlnOrNull()
-                if (shopInput.equals("Yes", ignoreCase = true)) {
+                if (shopInput.equals("yes", ignoreCase = true)) {
                     openShop()
                 }
             }

@@ -7,12 +7,12 @@ class Balance {
     fun deposit(amount: Int){
         this.amount += amount
     }
-    fun withdraw(withdraw:Int): Boolean {
+    fun withdraw(withdraw: Int): Boolean {
         if (withdraw <= amount){
             this.amount -= withdraw
             return true
-            } else {
-                println("Not enough funds")
+        } else {
+            println("Not enough funds")
             return false
         }
     }
@@ -36,7 +36,6 @@ class Wallet {
             println("Betting amount need to be above 0")
             return false
         }
-
         if (balance.canAfford(bet)) {
             balance.withdraw(bet)
             return true
@@ -44,28 +43,28 @@ class Wallet {
         return false
     }
 
-        fun playerWin(bet: Int) {
-            balance.deposit(bet * 2)
-        }
-
-        fun blackjackWin(bet: Int) {
-            val blackjackPayout = bet * 3 / 2 // 1.5배
-            balance.deposit(blackjackPayout)
-        }
-
-        fun pushReturn(bet: Int) {
-            balance.deposit(bet)
-        }
-
-        fun canAfford(amount: Int): Boolean {
-            return balance.canAfford(amount)
-        }
-
-        fun getCurrentBalance(): Int {
-            return balance.amount
-        }
-
-        fun displayBalance() {
-            balance.displayBalance()
-        }
+    fun playerWin(bet: Int) {
+        balance.deposit(bet * 2)
     }
+
+    fun blackjackWin(bet: Int) {
+        val blackjackPayout = bet * 5 / 2
+        balance.deposit(blackjackPayout)
+    }
+
+    fun pushReturn(bet: Int) {
+        balance.deposit(bet)
+    }
+
+    fun canAfford(amount: Int): Boolean {
+        return balance.canAfford(amount)
+    }
+
+    fun getCurrentBalance(): Int {
+        return balance.amount
+    }
+
+    fun displayBalance() {
+        balance.displayBalance()
+    }
+}

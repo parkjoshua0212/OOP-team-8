@@ -13,8 +13,8 @@ class Result{
         return when {
             playerScore == 21 && dealerScore == 21 && playerHandSize == 2 && dealerHandSize == 2 -> RoundResult.TIE
             playerHandSize == 2 && playerScore == 21 -> RoundResult.BLACKJACK
-            dealerHandSize == 2 && dealerScore == 21 -> RoundResult.DEALER_WIN
             playerScore > 21 -> RoundResult.PLAYER_BUST
+            dealerHandSize == 2 && dealerScore == 21 -> RoundResult.DEALER_WIN
             dealerScore > 21 -> RoundResult.PLAYER_WIN
             playerScore > dealerScore -> RoundResult.PLAYER_WIN
             playerScore < dealerScore -> RoundResult.DEALER_WIN
@@ -22,24 +22,18 @@ class Result{
         }
     }
 
-    fun applyResult(result: RoundResult, bet: Int, wallet: Wallet,  shop: Shop){
-        val hasDouble = shop.hasItem("double")
-        val hasInsurance = shop.hasItem("insurance")
+    fun applyResult(result: RoundResult, bet: Int, wallet: Wallet, shop: Shop){
+        val hasDouble = shop.checkMyItem("double")
+        val hasInsurance = shop.checkMyItem("insurance")
         val effectiveBet = if (hasDouble) bet * 2 else bet
 
         when (result) {
             RoundResult.PLAYER_WIN -> {
                 println("Win! +${effectiveBet * 2}$")
                 wallet.playerWin(effectiveBet)
-
             }
             RoundResult.DEALER_WIN -> {
-                println("Lost! -${bet}$")
-                //if item double is used
-                if (hasDouble) {
-                    //if hasDouble extra loss in wallet
-                    wallet.placeBet(bet)
-                }
+                println("Lost! -${effectiveBet}$")
             }
             RoundResult.TIE -> {
                 println("Tie!")
@@ -50,13 +44,9 @@ class Result{
                     println("Bust! but you've got insurance!")
                     wallet.pushReturn(bet)
                 } else {
-                    println("Bust! -${bet}$")
-                    if (hasDouble) {
-                        wallet.placeBet(bet)
-                    }
+                    println("Bust! -${effectiveBet}$")
                 }
             }
-
             RoundResult.BLACKJACK -> {
                 println("Blackjack!")
                 wallet.blackjackWin(bet)
