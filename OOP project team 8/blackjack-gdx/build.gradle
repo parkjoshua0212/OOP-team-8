@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
+    }
+}
+
+allprojects {
+    version = '1.0'
+    ext {
+        appName       = 'BlackjackGDX'
+        gdxVersion    = '1.12.1'
+        kotlinVersion = '1.9.22'
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/releases/' }
+    }
+}
+
+project(':desktop') {
+    apply plugin: 'kotlin'
+    apply plugin: 'application'
+
+    dependencies {
+        implementation project(':core')
+        implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    }
+
+    application {
+        mainClass = 'com.oop.blackjack.desktop.DesktopLauncherKt'
+    }
+
+    jar {
+        archiveFileName = "${appName}-desktop.jar"
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        manifest { attributes 'Main-Class': 'com.oop.blackjack.desktop.DesktopLauncherKt' }
+        from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+}
+
+project(':core') {
+    apply plugin: 'kotlin'
+
+    dependencies {
+        api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    }
+}
