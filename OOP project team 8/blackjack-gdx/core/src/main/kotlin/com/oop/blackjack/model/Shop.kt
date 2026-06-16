@@ -10,7 +10,7 @@ data class ShopItem(
 class Shop {
     val catalog = listOf(
         ShopItem("hint",      "Peek",     200, "Reveal the dealer's hidden card"),
-        ShopItem("insurance", "Shield",   300, "Get your bet back if you bust"),
+        ShopItem("insurance", "Shield",   300, "Get your bet back on any loss"),
         ShopItem("double",    "Double Up",500, "2× payout on a win this round")
     )
 

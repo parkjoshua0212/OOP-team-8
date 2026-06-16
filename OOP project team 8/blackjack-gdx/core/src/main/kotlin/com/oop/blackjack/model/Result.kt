@@ -36,7 +36,7 @@ object ResultResolver {
             RoundResult.DEALER_BUST -> wallet.onWin(effectiveBet)
             RoundResult.PUSH        -> wallet.onPush(bet)
             RoundResult.PLAYER_BUST -> if (hasInsurance) wallet.onPush(bet)
-            RoundResult.DEALER_WIN  -> Unit   // bet already lost
+            RoundResult.DEALER_WIN  -> if (hasInsurance) wallet.onPush(bet)   // Shield refunds the bet on any loss
         }
     }
 
@@ -46,7 +46,7 @@ object ResultResolver {
         RoundResult.DEALER_BUST -> "DEALER BUSTS — YOU WIN!"
         RoundResult.PUSH        -> "PUSH — BET RETURNED"
         RoundResult.PLAYER_BUST -> if (shop.isActive("insurance")) "BUST — SHIELD SAVED YOU!" else "BUST!"
-        RoundResult.DEALER_WIN  -> "DEALER WINS"
+        RoundResult.DEALER_WIN  -> if (shop.isActive("insurance")) "DEALER WINS — SHIELD SAVED YOU!" else "DEALER WINS"
     }
 
     fun isPlayerPositive(result: RoundResult): Boolean = result in setOf(
