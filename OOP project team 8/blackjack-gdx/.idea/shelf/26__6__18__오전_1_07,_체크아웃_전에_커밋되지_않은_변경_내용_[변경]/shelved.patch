@@ -1,0 +1,107 @@
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>buildscript {\n    repositories {\n        mavenCentral()\n        gradlePluginPortal()\n    }\n    dependencies {\n        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'\n    }\n}\n\nallprojects {\n    version = '1.0'\n    ext {\n        appName       = 'BlackjackGDX'\n        gdxVersion    = '1.12.1'\n        kotlinVersion = '1.9.22'\n    }\n    repositories {\n        mavenCentral()\n        maven { url 'https://oss.sonatype.org/content/repositories/releases/' }\n    }\n}\n\nproject(':desktop') {\n    apply plugin: 'kotlin'\n    apply plugin: 'application'\n\n    dependencies {\n        implementation project(':core')\n        implementation \"com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion\"\n        implementation \"com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop\"\n    }\n\n    application {\n        mainClass = 'com.oop.blackjack.desktop.DesktopLauncherKt'\n    }\n\n    jar {\n        archiveFileName = \"${appName}-desktop.jar\"\n        duplicatesStrategy = DuplicatesStrategy.EXCLUDE\n        manifest { attributes 'Main-Class': 'com.oop.blackjack.desktop.DesktopLauncherKt' }\n        from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }\n    }\n}\n\nproject(':core') {\n    apply plugin: 'kotlin'\n\n    dependencies {\n        api \"com.badlogicgames.gdx:gdx:$gdxVersion\"\n        implementation \"org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion\"\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 2f65a007b0ed38b1b8ade45ae95e13aa80806d55)
++++ b/build.gradle	(date 1781626359823)
+@@ -35,6 +35,10 @@
+         mainClass = 'com.oop.blackjack.desktop.DesktopLauncherKt'
+     }
+ 
++    run {
++        jvmArgs '-XstartOnFirstThread'
++    }
++
+     jar {
+         archiveFileName = "${appName}-desktop.jar"
+         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+Index: .idea/blackjack-gdx.iml
+===================================================================
+diff --git a/.idea/blackjack-gdx.iml b/.idea/blackjack-gdx.iml
+new file mode 100644
+--- /dev/null	(date 1781625302852)
++++ b/.idea/blackjack-gdx.iml	(date 1781625302852)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: core/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>14\n0
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab b/core/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+--- a/core/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab	(revision 2f65a007b0ed38b1b8ade45ae95e13aa80806d55)
++++ b/core/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab	(date 1781625652835)
+@@ -1,2 +1,2 @@
+-14
++12
+ 0
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleJvm\" value=\"#JAVA_HOME\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/core\" />\n            <option value=\"$PROJECT_DIR$/desktop\" />\n          </set>\n        </option>\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 2f65a007b0ed38b1b8ade45ae95e13aa80806d55)
++++ b/.idea/gradle.xml	(date 1781625451772)
+@@ -5,7 +5,7 @@
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="#JAVA_HOME" />
++        <option name="gradleJvm" value="temurin-17" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+Index: desktop/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>2\n0
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/desktop/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab b/desktop/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+--- a/desktop/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab	(revision 2f65a007b0ed38b1b8ade45ae95e13aa80806d55)
++++ b/desktop/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab	(date 1781625653212)
+@@ -1,2 +1,2 @@
+-2
++1
+ 0
+\ No newline at end of file
+Index: ../../.idea/OOP-team-8.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../.idea/OOP-team-8.iml b/../../.idea/OOP-team-8.iml
+new file mode 100644
+--- /dev/null	(date 1780616843552)
++++ b/../../.idea/OOP-team-8.iml	(date 1780616843552)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file

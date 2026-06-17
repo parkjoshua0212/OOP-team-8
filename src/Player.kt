@@ -1,11 +1,17 @@
 package com.oop.game
 
+// Player와 Dealer의 공통 속성/기능을 묶은 부모 클래스
+// open: 상속할 수 있도록 열어둠
+
 open class Participant {
+    // 손패 리스트, protected set: 외부에서 읽기는 가능하나 수정은 이 클래스와 하위 클래스에서만
     var hand = mutableListOf<Card>()
         protected set
+    // 점수, 위와 마찬가지
     var score = 0
         protected set
 
+    // Ace를 11로 계산하되, 21 초과 시 순서대로 1로 줄여 최적 점수 계산
     fun calculateScore(hand: MutableList<Card>): Int {
         var score = 0
         var aceCount = 0
@@ -22,6 +28,7 @@ open class Participant {
         return score
     }
 
+    // 덱에서 카드를 뽑아 손패에 추가하고 점수 갱신
     fun drawCard(deck: Deck) {
         if (!deck.isEmpty()) {
             val card = deck.dealCard()
@@ -32,7 +39,9 @@ open class Participant {
 }
 
 
+// Participant를 상속받은 플레이어 클래스
 class Player : Participant() {
+    // 점수가 21 미만일 때 히트/스탠드 반복 선택
     fun takeTurn(deck: Deck) {
         while (score < 21) {
             println("Do you want to hit? (yes/no)")
@@ -49,6 +58,7 @@ class Player : Participant() {
 }
 
 
+// 딜러는 17 미만이면 무조건 히트 (플레이어와 달리 선택지 없음)
 class Dealer : Participant() {
     fun takeTurn(deck: Deck) {
         while (score < 17) {
@@ -57,6 +67,7 @@ class Dealer : Participant() {
     }
 }
 
+// 게임 전체 흐름을 관리하는 클래스
 class Game {
     val wallet = Wallet()
     val shop = Shop()
@@ -66,6 +77,7 @@ class Game {
     val totalStages = 20
     val roundsPerStage = 5
 
+    // 최소 베팅액 이상, 잔액 이내로 베팅 입력받기
     fun getBet(minBet: Int): Int {
         while (true) {
             println("Enter betting amount: (Minimum betting req: $minBet)")
@@ -85,6 +97,7 @@ class Game {
         }
     }
 
+    // 상점을 열어 아이템 구매 진행
     fun openShop() {
         shop.showItems()
         println("Enter the item you want to purchase.")
@@ -95,6 +108,7 @@ class Game {
         }
     }
 
+    // 한 라운드 진행: 카드 배분 → 아이템 사용 → 플레이어 턴 → 딜러 턴 → 결과 처리
     fun playRound(bet: Int) {
         val deck = Deck()
         val player = Player()
@@ -139,6 +153,7 @@ class Game {
         wallet.displayBalance()
     }
 
+    // 한 스테이지(5라운드) 진행, 목표 금액 달성 시 true 반환
     fun playStage(stage: Int, targetBalance: Int): Boolean {
         val minBet = targetBalance / 10
 
@@ -184,6 +199,7 @@ class Game {
         }
     }
 
+    // 게임 시작: 잔액 초기화 후 20스테이지 순서대로 진행
     fun start() {
         wallet.initialize(initialBalance)
 
@@ -207,6 +223,7 @@ class Game {
     }
 }
 
+// 프로그램 시작
 fun main() {
     val game = Game()
     game.start()

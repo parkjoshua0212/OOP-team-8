@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d09df2db-bfd7-489d-9a8f-2e19a81c0604" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Deck.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Result.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Result.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +51,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "heok013125"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/parkjoshua0212/OOP-team-8.git",
+    "accountId": "6dc415a1-05e3-4ad5-a27c-9ec6b2b3334f"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7,
   &quot;fromUser&quot;: false
@@ -58,27 +72,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Kotlin.DeckKt.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.PlayerKt (1).executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.PlayerKt.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.WalletKt.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/parkj/New folder/oop blackjack/OOP-team-8&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/USER/Desktop/blackjack testing/BlackJackTest/src/Main.kt&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Kotlin.DeckKt.executor": "Run",
+    "Kotlin.PlayerKt (1).executor": "Run",
+    "Kotlin.PlayerKt.executor": "Run",
+    "Kotlin.WalletKt.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/heok2/Desktop/OOP-team-8",
+    "onboarding.tips.debug.path": "C:/Users/USER/Desktop/blackjack testing/BlackJackTest/src/Main.kt",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Kotlin.PlayerKt (1)">
     <configuration name="DeckKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DeckKt" />
